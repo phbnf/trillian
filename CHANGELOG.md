@@ -2,15 +2,11 @@
 
 ## HEAD
 
-<<<<<<< HEAD
-* Exporte logserver read counter metric together with logIDs
+* Export logserver read counter metric together with logIDs
 * Recommended go version for development: 1.20
   * This is the version used by the cloudbuild presubmits. Using a
     different version can lead to presubmits failing due to unexpected
     diffs.
-=======
-* Export logserver read counter metric together with logIDs
->>>>>>> 14e2b1ec (Typo)
 
 ## v.1.5.2
 

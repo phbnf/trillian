@@ -9,12 +9,10 @@ variable "region" {
 
 provider "google" {
   project = var.gcp_project
-  version = "~> 3.0.0-beta.1"
 }
 
 provider "google-beta" {
   project = var.gcp_project
-  version = "~> 3.0.0-beta.1"
 }
 
 # Enable required API in the project
@@ -36,7 +34,7 @@ data "google_container_engine_versions" "gke-ver" {
 }
 
 resource "google_container_cluster" "trillian-cluster" {
-  provider           = google-beta
+  provider           = google
   name               = "trillian-opensource-ci"
   location           = var.region
   node_version       = data.google_container_engine_versions.gke-ver.latest_node_version
