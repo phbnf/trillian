@@ -25,6 +25,21 @@ resource "google_project_service" "spanner-api" {
   service = "spanner.googleapis.com"
 }
 
+resource "google_service_account" "preexisting" {
+  account_id   = "113299735689117658619"
+}
+
+module "my-app-workload-identity" {
+  source              = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
+  use_existing_gcp_sa = true
+  name                = google_service_account.preexisting.account_id
+  project_id          = var.gcp_project
+
+  # wait for the custom GSA to be created to force module data source read during apply
+  # https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/issues/1059
+  depends_on = [google_service_account.preexisting]
+}
+
 # Main cluster definition
 
 ## Force recent version for Kubernetes master
@@ -56,10 +71,6 @@ resource "google_container_cluster" "trillian-cluster" {
     ]
   }
 
-  workload_identity_config {
-    identity_namespace = "${var.gcp_project}.svc.id.goog"
-  }
-
   depends_on = [
     google_project_service.container-api
   ]
@@ -85,7 +96,7 @@ resource "google_spanner_database" "trillian-db" {
   instance = google_spanner_instance.trillian-spanner.name
   name     = "trillian-db"
   # Format the DDL (remove comment and split the lines)
-  ddl = split(";", replace(replace(local.trillian_ddl, "/--.*\\n/", ""), "\n", ""))
+  ddl = split(";", replace(replace(locals.trillian_ddl, "/--.*\\n/", ""), "\n", ""))
 }
 
 # Create a GCP service account, give it access to Spanner and add a binding so that a
