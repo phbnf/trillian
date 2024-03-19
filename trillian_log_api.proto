@@ -100,6 +100,12 @@ service TrillianLog {
   rpc GetEntryAndProof(GetEntryAndProofRequest)
       returns (GetEntryAndProofResponse) {}
 
+  // GetTile returns a Tile which root is at a given path.
+  //
+  // TODO: add more details
+  rpc GetTile(GetTileRequest)
+      returns (GetTileResponse) {}
+  
   // InitLog initializes a particular tree, creating the initial signed log
   // root (which will be of size 0).
   rpc InitLog(InitLogRequest) returns (InitLogResponse) {}
@@ -232,6 +238,16 @@ message GetEntryAndProofResponse {
   Proof proof = 2;
   LogLeaf leaf = 3;
   SignedLogRoot signed_log_root = 4;
+}
+
+message GetTileRequest {
+  int64 log_id = 1;
+  TileKey tile_key = 2; 
+  ChargeTo charge_to = 3;
+}
+
+message GetTileResponse {
+  Tile tile = 1; 
 }
 
 message InitLogRequest {

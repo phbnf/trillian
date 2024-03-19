@@ -239,3 +239,39 @@ message Proof {
   reserved 2;
   reserved "proof_node";
 }
+
+// Tile holds a tile representation of a Merkle subtree.
+// Copy of the subtree proto for now
+// TODO(phboneff): simplify this
+message Tile {
+  // subtree's prefix (must be a multiple of 8 bits)
+  bytes prefix = 1;
+  // subtree's depth
+  int32 depth = 2;
+
+  // map of suffix (within subtree) to subtree-leaf node hash
+  map<string, bytes> leaves = 4;
+
+  // Map of suffix (within subtree) to subtree-internal node hash.
+  // This structure is usually used in RAM as a cache, the internal nodes of
+  // the subtree are not generally stored. However internal nodes are stored for
+  // partially filled log subtrees.
+  map<string, bytes> internal_nodes = 5;
+  // Used as a crosscheck on the internal node map by recording its expected
+  // size after loading and repopulation.
+  uint32 internal_node_count = 6;
+
+  reserved 3;
+}
+
+// TODO(phboneff): I'd use uint64, but everything else in this file uses int64,
+// even when it could use an uint64, so let's punt this for now.
+message TileKey {
+  uint64 tile_level = 1;
+  uint64 tile_index = 2;
+}
+
+message NodeID {
+  uint64 level = 1;
+  uint64 index = 2;
+}

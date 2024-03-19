@@ -60,7 +60,7 @@ func PopulateLogTile(st *storagepb.SubtreeProto, hasher merkle.LogHasher) error 
 		// Don't put leaves into the internal map and only update if we're rebuilding internal
 		// nodes. If the subtree was saved with internal nodes then we don't touch the map.
 		if id.Level > 0 && len(st.Leaves) == maxLeaves {
-			st.InternalNodes[toSuffix(id)] = hash
+			st.InternalNodes[ToSuffix(id)] = hash
 		}
 	}
 
@@ -69,7 +69,7 @@ func PopulateLogTile(st *storagepb.SubtreeProto, hasher merkle.LogHasher) error 
 
 	// We need to update the subtree root hash regardless of whether it's fully populated
 	for leafIndex := uint64(0); leafIndex < uint64(len(st.Leaves)); leafIndex++ {
-		sfxKey := toSuffix(compact.NewNodeID(0, leafIndex))
+		sfxKey := ToSuffix(compact.NewNodeID(0, leafIndex))
 		h := st.Leaves[sfxKey]
 		if h == nil {
 			return fmt.Errorf("unexpectedly got nil for subtree leaf suffix %s", sfxKey)
@@ -123,7 +123,7 @@ func prepareLogTile(st *storagepb.SubtreeProto) error {
 	return nil
 }
 
-func toSuffix(id compact.NodeID) string {
+func ToSuffix(id compact.NodeID) string {
 	depth := logStrataDepth - int(id.Level)
 	var index [8]byte
 	binary.BigEndian.PutUint64(index[:], id.Index<<(maxLogDepth-depth))

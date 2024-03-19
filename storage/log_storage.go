@@ -55,6 +55,10 @@ type ReadOnlyLogTreeTX interface {
 	// same hash but different sequence numbers. If orderBySequence is true then the returned data
 	// will be in ascending sequence number order.
 	GetLeavesByHash(ctx context.Context, leafHashes [][]byte, orderBySequence bool) ([]*trillian.LogLeaf, error)
+	// GetTile retrieves the most recent Tile representation of a subtree subtree specified by id at (or below)
+	// the requested revision.
+	// If no such subtree exists it returns nil.
+	GetTile(ctx context.Context, tileKey *trillian.TileKey) (*trillian.Tile, error)
 	// LatestSignedLogRoot returns the most recent SignedLogRoot, if any.
 	LatestSignedLogRoot(ctx context.Context) (*trillian.SignedLogRoot, error)
 }

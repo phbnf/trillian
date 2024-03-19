@@ -529,6 +529,34 @@ func (t *TrillianLogRPCServer) GetEntryAndProof(ctx context.Context, req *trilli
 	return r, nil
 }
 
+func (t *TrillianLogRPCServer) GetTile(ctx context.Context, req *trillian.GetTileRequest) (*trillian.GetTileResponse, error) {
+	ctx, spanEnd := spanFor(ctx, "GetTile")
+	defer spanEnd()
+	if err := validateGetTileRequest(req); err != nil {
+		return nil, err
+	}
+
+	tree, ctx, err := t.getTreeAndContext(ctx, req.LogId, optsLogRead)
+	if err != nil {
+		return nil, err
+	}
+	tx, err := t.snapshotForTree(ctx, tree, "GetTile")
+	if err != nil {
+		return nil, err
+	}
+	defer t.closeAndLog(ctx, tree.TreeId, tx, "GetTile")
+	ctx = trees.NewContext(ctx, tree)
+
+	tile, err := tx.GetTile(ctx, req.TileKey)
+	if err != nil {
+		return nil, status.Errorf(codes.FailedPrecondition, "GetTile()=%v", err)
+	}
+
+	r := &trillian.GetTileResponse{Tile: tile}
+	return r, nil
+
+}
+
 func (t *TrillianLogRPCServer) commitAndLog(ctx context.Context, logID int64, tx storage.ReadOnlyLogTreeTX, op string) error {
 	err := tx.Commit(ctx)
 	if err != nil {

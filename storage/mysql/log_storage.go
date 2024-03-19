@@ -18,6 +18,7 @@ import (
 	"bytes"
 	"context"
 	"database/sql"
+	"encoding/binary"
 	"errors"
 	"fmt"
 	"sort"
@@ -33,6 +34,7 @@ import (
 	"github.com/google/trillian/types"
 	"github.com/transparency-dev/merkle/compact"
 	"github.com/transparency-dev/merkle/rfc6962"
+	"golang.org/x/exp/maps"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -325,6 +327,49 @@ func (t *logTreeTX) GetMerkleNodes(ctx context.Context, ids []compact.NodeID) ([
 	t.treeTX.mu.Lock()
 	defer t.treeTX.mu.Unlock()
 	return t.subtreeCache.GetNodes(ids, t.getSubtreesAtRev(ctx, t.readRev))
+}
+
+// GetTile returns the requested subtree at the read revision.
+func (t *logTreeTX) GetTile(ctx context.Context, tileKey *trillian.TileKey) (*trillian.Tile, error) {
+	t.treeTX.mu.Lock()
+	defer t.treeTX.mu.Unlock()
+	nodeID := compact.NodeID{Level: uint(tileKey.TileLevel) * 8, Index: tileKey.TileIndex}
+	tileID := getTileID(nodeID)
+	subTrees, err := t.getSubtrees(ctx, t.readRev, [][]byte{tileID})
+	if err != nil {
+		klog.Warningf("Failed to get tile: %s", err)
+		return nil, err
+	}
+	if len(subTrees) != 1 {
+		return nil, fmt.Errorf("got unexpected number of leaves %d, want 1", len(subTrees))
+	}
+	tile := trillian.Tile{
+		Depth:             subTrees[0].Depth,
+		InternalNodeCount: subTrees[0].InternalNodeCount,
+		Leaves:            maps.Clone(subTrees[0].Leaves),
+		InternalNodes:     maps.Clone(subTrees[0].InternalNodes),
+	}
+	copy(tile.Prefix, subTrees[0].Prefix)
+	return &tile, nil
+}
+
+// TODO(phboneff): This already exists in layout.go in cache. Move it out of cache.
+// getTileID returns the path from the "virtual" root at level 64 to the root
+// of the tile that the given node belongs to. All the bits of the returned
+// slice are significant because all tile heights are 8.
+//
+// Note that a root of a tile belongs to a tile above it (as its leaf node).
+// The exception is the "virtual" root which belongs to its own "pseudo" tile.
+func getTileID(id compact.NodeID) []byte {
+	if id.Level >= 64 {
+		return []byte{} // Note: Not nil, so that storage/SQL doesn't use NULL.
+	}
+	index := id.Index >> (8 - id.Level%8)
+	bytesCount := (64 - id.Level - 1) / 8
+
+	var bytes [8]byte
+	binary.BigEndian.PutUint64(bytes[:], index)
+	return bytes[8-bytesCount:]
 }
 
 func (t *logTreeTX) DequeueLeaves(ctx context.Context, limit int, cutoffTime time.Time) ([]*trillian.LogLeaf, error) {
