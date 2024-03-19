@@ -143,8 +143,8 @@ message ChargeTo {
 }
 
 message TileKey {
-  int64 tile_level;
-  int64 tile_index;
+  int64 tile_level = 1;
+  int64 tile_index = 2;
 }
 
 message QueueLeafRequest {

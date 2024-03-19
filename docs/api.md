@@ -19,12 +19,15 @@
     - [GetLatestSignedLogRootResponse](#trillian-GetLatestSignedLogRootResponse)
     - [GetLeavesByRangeRequest](#trillian-GetLeavesByRangeRequest)
     - [GetLeavesByRangeResponse](#trillian-GetLeavesByRangeResponse)
+    - [GetTileRequest](#trillian-GetTileRequest)
+    - [GetTileResponse](#trillian-GetTileResponse)
     - [InitLogRequest](#trillian-InitLogRequest)
     - [InitLogResponse](#trillian-InitLogResponse)
     - [LogLeaf](#trillian-LogLeaf)
     - [QueueLeafRequest](#trillian-QueueLeafRequest)
     - [QueueLeafResponse](#trillian-QueueLeafResponse)
     - [QueuedLogLeaf](#trillian-QueuedLogLeaf)
+    - [TileKey](#trillian-TileKey)
   
     - [TrillianLog](#trillian-TrillianLog)
   
@@ -42,6 +45,7 @@
 - [trillian.proto](#trillian-proto)
     - [Proof](#trillian-Proof)
     - [SignedLogRoot](#trillian-SignedLogRoot)
+    - [Tile](#trillian-Tile)
     - [Tree](#trillian-Tree)
   
     - [HashStrategy](#trillian-HashStrategy)
@@ -315,6 +319,38 @@ As an example, a Certificate Transparency frontend might set the following user 
 
 
 
+<a name="trillian-GetTileRequest"></a>
+
+### GetTileRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| log_id | [int64](#int64) |  |  |
+| tile_key | [TileKey](#trillian-TileKey) |  |  |
+| charge_to | [ChargeTo](#trillian-ChargeTo) |  |  |
+
+
+
+
+
+
+<a name="trillian-GetTileResponse"></a>
+
+### GetTileResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tile | [Tile](#trillian-Tile) |  |  |
+
+
+
+
+
+
 <a name="trillian-InitLogRequest"></a>
 
 ### InitLogRequest
@@ -431,6 +467,22 @@ TODO(pavelkalinnikov): Consider renaming it to AddLogLeafResult or the like.
 
 
 
+
+<a name="trillian-TileKey"></a>
+
+### TileKey
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tile_level | [int64](#int64) |  |  |
+| tile_index | [int64](#int64) |  |  |
+
+
+
+
+
  
 
  
@@ -488,6 +540,9 @@ If the earlier tree size is larger than the server is aware of, an InvalidArgume
 | GetEntryAndProof | [GetEntryAndProofRequest](#trillian-GetEntryAndProofRequest) | [GetEntryAndProofResponse](#trillian-GetEntryAndProofResponse) | GetEntryAndProof returns a log leaf and the corresponding inclusion proof to a specified tree size, for a given leaf index in a particular tree.
 
 If the requested tree size is unavailable but the leaf is in scope for the current tree, the returned proof will be for the current tree size rather than the requested tree size. |
+| GetTile | [GetTileRequest](#trillian-GetTileRequest) | [GetTileResponse](#trillian-GetTileResponse) | GetTile returns a Tile which root is at a given path.
+
+TODO: add more details |
 | InitLog | [InitLogRequest](#trillian-InitLogRequest) | [InitLogResponse](#trillian-InitLogResponse) | InitLog initializes a particular tree, creating the initial signed log root (which will be of size 0). |
 | AddSequencedLeaves | [AddSequencedLeavesRequest](#trillian-AddSequencedLeavesRequest) | [AddSequencedLeavesResponse](#trillian-AddSequencedLeavesResponse) | AddSequencedLeaves adds a batch of leaves with assigned sequence numbers to a pre-ordered log. The indices of the provided leaves must be contiguous. |
 | GetLeavesByRange | [GetLeavesByRangeRequest](#trillian-GetLeavesByRangeRequest) | [GetLeavesByRangeResponse](#trillian-GetLeavesByRangeResponse) | GetLeavesByRange returns a batch of leaves whose leaf indices are in a sequential range. |
@@ -688,6 +743,18 @@ A serialized v1 log root will therefore be laid out as:
 &#43;---&#43;---&#43;---&#43;---&#43;---&#43;-....---&#43; | len | metadata | &#43;---&#43;---&#43;---&#43;---&#43;---&#43;-....---&#43;
 
 (with all integers encoded big-endian). |
+
+
+
+
+
+
+<a name="trillian-Tile"></a>
+
+### Tile
+Tile holds a tile representation of a Merkle subtree.
+
+TODO: add things here
 
 
 

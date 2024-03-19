@@ -140,6 +140,21 @@ func (mr *MockTrillianLogServerMockRecorder) GetLeavesByRange(arg0, arg1 interfa
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLeavesByRange", reflect.TypeOf((*MockTrillianLogServer)(nil).GetLeavesByRange), arg0, arg1)
 }
 
+// GetTile mocks base method.
+func (m *MockTrillianLogServer) GetTile(arg0 context.Context, arg1 *trillian.GetTileRequest) (*trillian.GetTileResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTile", arg0, arg1)
+	ret0, _ := ret[0].(*trillian.GetTileResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTile indicates an expected call of GetTile.
+func (mr *MockTrillianLogServerMockRecorder) GetTile(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTile", reflect.TypeOf((*MockTrillianLogServer)(nil).GetTile), arg0, arg1)
+}
+
 // InitLog mocks base method.
 func (m *MockTrillianLogServer) InitLog(arg0 context.Context, arg1 *trillian.InitLogRequest) (*trillian.InitLogResponse, error) {
 	m.ctrl.T.Helper()

@@ -39,6 +39,7 @@ const (
 	TrillianLog_GetConsistencyProof_FullMethodName     = "/trillian.TrillianLog/GetConsistencyProof"
 	TrillianLog_GetLatestSignedLogRoot_FullMethodName  = "/trillian.TrillianLog/GetLatestSignedLogRoot"
 	TrillianLog_GetEntryAndProof_FullMethodName        = "/trillian.TrillianLog/GetEntryAndProof"
+	TrillianLog_GetTile_FullMethodName                 = "/trillian.TrillianLog/GetTile"
 	TrillianLog_InitLog_FullMethodName                 = "/trillian.TrillianLog/InitLog"
 	TrillianLog_AddSequencedLeaves_FullMethodName      = "/trillian.TrillianLog/AddSequencedLeaves"
 	TrillianLog_GetLeavesByRange_FullMethodName        = "/trillian.TrillianLog/GetLeavesByRange"
@@ -83,6 +84,10 @@ type TrillianLogClient interface {
 	// in scope for the current tree, the returned proof will be for the
 	// current tree size rather than the requested tree size.
 	GetEntryAndProof(ctx context.Context, in *GetEntryAndProofRequest, opts ...grpc.CallOption) (*GetEntryAndProofResponse, error)
+	// GetTile returns a Tile which root is at a given path.
+	//
+	// TODO: add more details
+	GetTile(ctx context.Context, in *GetTileRequest, opts ...grpc.CallOption) (*GetTileResponse, error)
 	// InitLog initializes a particular tree, creating the initial signed log
 	// root (which will be of size 0).
 	InitLog(ctx context.Context, in *InitLogRequest, opts ...grpc.CallOption) (*InitLogResponse, error)
@@ -156,6 +161,15 @@ func (c *trillianLogClient) GetEntryAndProof(ctx context.Context, in *GetEntryAn
 	return out, nil
 }
 
+func (c *trillianLogClient) GetTile(ctx context.Context, in *GetTileRequest, opts ...grpc.CallOption) (*GetTileResponse, error) {
+	out := new(GetTileResponse)
+	err := c.cc.Invoke(ctx, TrillianLog_GetTile_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *trillianLogClient) InitLog(ctx context.Context, in *InitLogRequest, opts ...grpc.CallOption) (*InitLogResponse, error) {
 	out := new(InitLogResponse)
 	err := c.cc.Invoke(ctx, TrillianLog_InitLog_FullMethodName, in, out, opts...)
@@ -222,6 +236,10 @@ type TrillianLogServer interface {
 	// in scope for the current tree, the returned proof will be for the
 	// current tree size rather than the requested tree size.
 	GetEntryAndProof(context.Context, *GetEntryAndProofRequest) (*GetEntryAndProofResponse, error)
+	// GetTile returns a Tile which root is at a given path.
+	//
+	// TODO: add more details
+	GetTile(context.Context, *GetTileRequest) (*GetTileResponse, error)
 	// InitLog initializes a particular tree, creating the initial signed log
 	// root (which will be of size 0).
 	InitLog(context.Context, *InitLogRequest) (*InitLogResponse, error)
@@ -254,6 +272,9 @@ func (UnimplementedTrillianLogServer) GetLatestSignedLogRoot(context.Context, *G
 }
 func (UnimplementedTrillianLogServer) GetEntryAndProof(context.Context, *GetEntryAndProofRequest) (*GetEntryAndProofResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetEntryAndProof not implemented")
+}
+func (UnimplementedTrillianLogServer) GetTile(context.Context, *GetTileRequest) (*GetTileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTile not implemented")
 }
 func (UnimplementedTrillianLogServer) InitLog(context.Context, *InitLogRequest) (*InitLogResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InitLog not implemented")
@@ -384,6 +405,24 @@ func _TrillianLog_GetEntryAndProof_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TrillianLog_GetTile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TrillianLogServer).GetTile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TrillianLog_GetTile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TrillianLogServer).GetTile(ctx, req.(*GetTileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TrillianLog_InitLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(InitLogRequest)
 	if err := dec(in); err != nil {
@@ -468,6 +507,10 @@ var TrillianLog_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetEntryAndProof",
 			Handler:    _TrillianLog_GetEntryAndProof_Handler,
+		},
+		{
+			MethodName: "GetTile",
+			Handler:    _TrillianLog_GetTile_Handler,
 		},
 		{
 			MethodName: "InitLog",
