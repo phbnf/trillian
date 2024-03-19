@@ -327,6 +327,18 @@ func (t *logTreeTX) GetMerkleNodes(ctx context.Context, ids []compact.NodeID) ([
 	return t.subtreeCache.GetNodes(ids, t.getSubtreesAtRev(ctx, t.readRev))
 }
 
+// GetTile returns the requested subtree at the read revision.
+func (t *logTreeTX) GetTile(ctx context.Context, tileKey storage.TileKey) (trillian.Tile, error) {
+	t.treeTX.mu.Lock()
+	defer t.treeTX.mu.Unlock()
+	_, err := t.subtreeCache.GetSubtree(tileKey, t.getSubtreesAtRev(ctx, t.readRev))
+	if err != nil {
+		// TODO: figuring out what to do
+	}
+	// TODO: parse the subtree into the tile
+	return trillian.Tile{}, nil
+}
+
 func (t *logTreeTX) DequeueLeaves(ctx context.Context, limit int, cutoffTime time.Time) ([]*trillian.LogLeaf, error) {
 	t.treeTX.mu.Lock()
 	defer t.treeTX.mu.Unlock()

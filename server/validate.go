@@ -82,6 +82,16 @@ func validateGetEntryAndProofRequest(req *trillian.GetEntryAndProofRequest) erro
 	return nil
 }
 
+func validateGetTileRequest(req *trillian.GetTileRequest) error {
+	if req.TileKey.TileLevel <= 0 {
+		return status.Errorf(codes.InvalidArgument, "GetTile.TileKey.TileLevel: %v, want > 0", req.TileKey.TileLevel)
+	}
+	if req.TileKey.TileIndex <= 0 {
+		return status.Errorf(codes.InvalidArgument, "GetTile.TileKey.TileIndex: %v, want > 0", req.TileKey.TileIndex)
+	}
+	return nil
+}
+
 func validateAddSequencedLeavesRequest(req *trillian.AddSequencedLeavesRequest) error {
 	prefix := "AddSequencedLeavesRequest"
 	if err := validateLogLeaves(req.Leaves, prefix); err != nil {

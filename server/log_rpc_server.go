@@ -529,6 +529,33 @@ func (t *TrillianLogRPCServer) GetEntryAndProof(ctx context.Context, req *trilli
 	return r, nil
 }
 
+func (t *TrillianLogRPCServer) GetTile(ctx context.Context, req *trillian.GetTileRequest) (*trillian.GetTileResponse, error) {
+	ctx, spanEnd := spanFor(ctx, "GetTile")
+	defer spanEnd()
+	if err := validateGetTileRequest(req); err != nil {
+		return nil, err
+	}
+
+	tree, ctx, err := t.getTreeAndContext(ctx, req.LogId, optsLogRead)
+	if err != nil {
+		return nil, err
+	}
+	tx, err := t.snapshotForTree(ctx, tree, "GetTile")
+	if err != nil {
+		return nil, err
+	}
+	defer t.closeAndLog(ctx, tree.TreeId, tx, "GetTile")
+	ctx = trees.NewContext(ctx, tree)
+
+	// TODO(phboneff)L check this
+	// Next we need to make sure the requested tree size corresponds to an STH, so that we
+	// have a usable tree revision
+
+	// TODO(phboneff): the API right now uses a TileID, use this here. And maybe pass this down as much as possible.
+	tx.GetTile(ctx, logID)
+
+}
+
 func (t *TrillianLogRPCServer) commitAndLog(ctx context.Context, logID int64, tx storage.ReadOnlyLogTreeTX, op string) error {
 	err := tx.Commit(ctx)
 	if err != nil {

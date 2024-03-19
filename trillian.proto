@@ -239,3 +239,9 @@ message Proof {
   reserved 2;
   reserved "proof_node";
 }
+// Tile holds a tile representation of a Merkle subtree.
+message Tile {
+  // TODO: add things here
+}
+
+message 

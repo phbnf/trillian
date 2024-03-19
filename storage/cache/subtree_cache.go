@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/google/trillian/storage"
 	"github.com/google/trillian/storage/storagepb"
 	"github.com/google/trillian/storage/tree"
 	"github.com/transparency-dev/merkle"
@@ -173,6 +174,21 @@ func (s *SubtreeCache) GetNodes(ids []compact.NodeID, getSubtrees GetSubtreesFun
 		}
 	}
 	return ret, nil
+}
+
+// GetSubtree returns the requested Subtree, calling the getSubtrees function if
+// they are not already cached.
+func (s *SubtreeCache) GetSubtree(tileKey storage.TileKey, getSubtrees GetSubtreesFunc) (*storagepb.SubtreeProto, error) {
+	ids := []compact.NodeID{}
+	// TODO(phboneff) convert the tileKey to a compact.NodeID
+	if notFound, err := s.preload(ids, getSubtrees); err != nil {
+		return nil, err
+	} else if r := len(notFound); r != 0 {
+		return nil, fmt.Errorf("preload did not get all tiles: %d not found", r)
+	}
+
+	//TODO(phboneff): convert the TileKey to a string
+	return s.subtrees[string(id)], nil
 }
 
 // getNodeHash returns a single node hash from the cache.
