@@ -458,6 +458,21 @@ func (mr *MockLogTreeTXMockRecorder) GetMerkleNodes(arg0, arg1 interface{}) *gom
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMerkleNodes", reflect.TypeOf((*MockLogTreeTX)(nil).GetMerkleNodes), arg0, arg1)
 }
 
+// GetTile mocks base method.
+func (m *MockLogTreeTX) GetTile(arg0 context.Context, arg1 *trillian.TileKey) (*trillian.Tile, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTile", arg0, arg1)
+	ret0, _ := ret[0].(*trillian.Tile)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTile indicates an expected call of GetTile.
+func (mr *MockLogTreeTXMockRecorder) GetTile(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTile", reflect.TypeOf((*MockLogTreeTX)(nil).GetTile), arg0, arg1)
+}
+
 // LatestSignedLogRoot mocks base method.
 func (m *MockLogTreeTX) LatestSignedLogRoot(arg0 context.Context) (*trillian.SignedLogRoot, error) {
 	m.ctrl.T.Helper()
@@ -690,6 +705,21 @@ func (m *MockReadOnlyLogTreeTX) GetMerkleNodes(arg0 context.Context, arg1 []comp
 func (mr *MockReadOnlyLogTreeTXMockRecorder) GetMerkleNodes(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMerkleNodes", reflect.TypeOf((*MockReadOnlyLogTreeTX)(nil).GetMerkleNodes), arg0, arg1)
+}
+
+// GetTile mocks base method.
+func (m *MockReadOnlyLogTreeTX) GetTile(arg0 context.Context, arg1 *trillian.TileKey) (*trillian.Tile, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTile", arg0, arg1)
+	ret0, _ := ret[0].(*trillian.Tile)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTile indicates an expected call of GetTile.
+func (mr *MockReadOnlyLogTreeTXMockRecorder) GetTile(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTile", reflect.TypeOf((*MockReadOnlyLogTreeTX)(nil).GetTile), arg0, arg1)
 }
 
 // LatestSignedLogRoot mocks base method.

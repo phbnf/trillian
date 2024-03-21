@@ -874,6 +874,116 @@ func (x *GetEntryAndProofResponse) GetSignedLogRoot() *SignedLogRoot {
 	return nil
 }
 
+type GetTileRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	LogId    int64     `protobuf:"varint,1,opt,name=log_id,json=logId,proto3" json:"log_id,omitempty"`
+	TileKey  *TileKey  `protobuf:"bytes,2,opt,name=tile_key,json=tileKey,proto3" json:"tile_key,omitempty"`
+	ChargeTo *ChargeTo `protobuf:"bytes,3,opt,name=charge_to,json=chargeTo,proto3" json:"charge_to,omitempty"`
+}
+
+func (x *GetTileRequest) Reset() {
+	*x = GetTileRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_trillian_log_api_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetTileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTileRequest) ProtoMessage() {}
+
+func (x *GetTileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_trillian_log_api_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTileRequest.ProtoReflect.Descriptor instead.
+func (*GetTileRequest) Descriptor() ([]byte, []int) {
+	return file_trillian_log_api_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetTileRequest) GetLogId() int64 {
+	if x != nil {
+		return x.LogId
+	}
+	return 0
+}
+
+func (x *GetTileRequest) GetTileKey() *TileKey {
+	if x != nil {
+		return x.TileKey
+	}
+	return nil
+}
+
+func (x *GetTileRequest) GetChargeTo() *ChargeTo {
+	if x != nil {
+		return x.ChargeTo
+	}
+	return nil
+}
+
+type GetTileResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Tile *Tile `protobuf:"bytes,1,opt,name=tile,proto3" json:"tile,omitempty"`
+}
+
+func (x *GetTileResponse) Reset() {
+	*x = GetTileResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_trillian_log_api_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetTileResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTileResponse) ProtoMessage() {}
+
+func (x *GetTileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_trillian_log_api_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTileResponse.ProtoReflect.Descriptor instead.
+func (*GetTileResponse) Descriptor() ([]byte, []int) {
+	return file_trillian_log_api_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetTileResponse) GetTile() *Tile {
+	if x != nil {
+		return x.Tile
+	}
+	return nil
+}
+
 type InitLogRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -886,7 +996,7 @@ type InitLogRequest struct {
 func (x *InitLogRequest) Reset() {
 	*x = InitLogRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_trillian_log_api_proto_msgTypes[13]
+		mi := &file_trillian_log_api_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -899,7 +1009,7 @@ func (x *InitLogRequest) String() string {
 func (*InitLogRequest) ProtoMessage() {}
 
 func (x *InitLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_trillian_log_api_proto_msgTypes[13]
+	mi := &file_trillian_log_api_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -912,7 +1022,7 @@ func (x *InitLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InitLogRequest.ProtoReflect.Descriptor instead.
 func (*InitLogRequest) Descriptor() ([]byte, []int) {
-	return file_trillian_log_api_proto_rawDescGZIP(), []int{13}
+	return file_trillian_log_api_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *InitLogRequest) GetLogId() int64 {
@@ -940,7 +1050,7 @@ type InitLogResponse struct {
 func (x *InitLogResponse) Reset() {
 	*x = InitLogResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_trillian_log_api_proto_msgTypes[14]
+		mi := &file_trillian_log_api_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -953,7 +1063,7 @@ func (x *InitLogResponse) String() string {
 func (*InitLogResponse) ProtoMessage() {}
 
 func (x *InitLogResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_trillian_log_api_proto_msgTypes[14]
+	mi := &file_trillian_log_api_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -966,7 +1076,7 @@ func (x *InitLogResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InitLogResponse.ProtoReflect.Descriptor instead.
 func (*InitLogResponse) Descriptor() ([]byte, []int) {
-	return file_trillian_log_api_proto_rawDescGZIP(), []int{14}
+	return file_trillian_log_api_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *InitLogResponse) GetCreated() *SignedLogRoot {
@@ -989,7 +1099,7 @@ type AddSequencedLeavesRequest struct {
 func (x *AddSequencedLeavesRequest) Reset() {
 	*x = AddSequencedLeavesRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_trillian_log_api_proto_msgTypes[15]
+		mi := &file_trillian_log_api_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1002,7 +1112,7 @@ func (x *AddSequencedLeavesRequest) String() string {
 func (*AddSequencedLeavesRequest) ProtoMessage() {}
 
 func (x *AddSequencedLeavesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_trillian_log_api_proto_msgTypes[15]
+	mi := &file_trillian_log_api_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1015,7 +1125,7 @@ func (x *AddSequencedLeavesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddSequencedLeavesRequest.ProtoReflect.Descriptor instead.
 func (*AddSequencedLeavesRequest) Descriptor() ([]byte, []int) {
-	return file_trillian_log_api_proto_rawDescGZIP(), []int{15}
+	return file_trillian_log_api_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *AddSequencedLeavesRequest) GetLogId() int64 {
@@ -1051,7 +1161,7 @@ type AddSequencedLeavesResponse struct {
 func (x *AddSequencedLeavesResponse) Reset() {
 	*x = AddSequencedLeavesResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_trillian_log_api_proto_msgTypes[16]
+		mi := &file_trillian_log_api_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1064,7 +1174,7 @@ func (x *AddSequencedLeavesResponse) String() string {
 func (*AddSequencedLeavesResponse) ProtoMessage() {}
 
 func (x *AddSequencedLeavesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_trillian_log_api_proto_msgTypes[16]
+	mi := &file_trillian_log_api_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1077,7 +1187,7 @@ func (x *AddSequencedLeavesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddSequencedLeavesResponse.ProtoReflect.Descriptor instead.
 func (*AddSequencedLeavesResponse) Descriptor() ([]byte, []int) {
-	return file_trillian_log_api_proto_rawDescGZIP(), []int{16}
+	return file_trillian_log_api_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *AddSequencedLeavesResponse) GetResults() []*QueuedLogLeaf {
@@ -1101,7 +1211,7 @@ type GetLeavesByRangeRequest struct {
 func (x *GetLeavesByRangeRequest) Reset() {
 	*x = GetLeavesByRangeRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_trillian_log_api_proto_msgTypes[17]
+		mi := &file_trillian_log_api_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1114,7 +1224,7 @@ func (x *GetLeavesByRangeRequest) String() string {
 func (*GetLeavesByRangeRequest) ProtoMessage() {}
 
 func (x *GetLeavesByRangeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_trillian_log_api_proto_msgTypes[17]
+	mi := &file_trillian_log_api_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1127,7 +1237,7 @@ func (x *GetLeavesByRangeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLeavesByRangeRequest.ProtoReflect.Descriptor instead.
 func (*GetLeavesByRangeRequest) Descriptor() ([]byte, []int) {
-	return file_trillian_log_api_proto_rawDescGZIP(), []int{17}
+	return file_trillian_log_api_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GetLeavesByRangeRequest) GetLogId() int64 {
@@ -1174,7 +1284,7 @@ type GetLeavesByRangeResponse struct {
 func (x *GetLeavesByRangeResponse) Reset() {
 	*x = GetLeavesByRangeResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_trillian_log_api_proto_msgTypes[18]
+		mi := &file_trillian_log_api_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1187,7 +1297,7 @@ func (x *GetLeavesByRangeResponse) String() string {
 func (*GetLeavesByRangeResponse) ProtoMessage() {}
 
 func (x *GetLeavesByRangeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_trillian_log_api_proto_msgTypes[18]
+	mi := &file_trillian_log_api_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1200,7 +1310,7 @@ func (x *GetLeavesByRangeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLeavesByRangeResponse.ProtoReflect.Descriptor instead.
 func (*GetLeavesByRangeResponse) Descriptor() ([]byte, []int) {
-	return file_trillian_log_api_proto_rawDescGZIP(), []int{18}
+	return file_trillian_log_api_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GetLeavesByRangeResponse) GetLeaves() []*LogLeaf {
@@ -1242,7 +1352,7 @@ type QueuedLogLeaf struct {
 func (x *QueuedLogLeaf) Reset() {
 	*x = QueuedLogLeaf{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_trillian_log_api_proto_msgTypes[19]
+		mi := &file_trillian_log_api_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1255,7 +1365,7 @@ func (x *QueuedLogLeaf) String() string {
 func (*QueuedLogLeaf) ProtoMessage() {}
 
 func (x *QueuedLogLeaf) ProtoReflect() protoreflect.Message {
-	mi := &file_trillian_log_api_proto_msgTypes[19]
+	mi := &file_trillian_log_api_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1268,7 +1378,7 @@ func (x *QueuedLogLeaf) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueuedLogLeaf.ProtoReflect.Descriptor instead.
 func (*QueuedLogLeaf) Descriptor() ([]byte, []int) {
-	return file_trillian_log_api_proto_rawDescGZIP(), []int{19}
+	return file_trillian_log_api_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *QueuedLogLeaf) GetLeaf() *LogLeaf {
@@ -1358,7 +1468,7 @@ type LogLeaf struct {
 func (x *LogLeaf) Reset() {
 	*x = LogLeaf{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_trillian_log_api_proto_msgTypes[20]
+		mi := &file_trillian_log_api_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1371,7 +1481,7 @@ func (x *LogLeaf) String() string {
 func (*LogLeaf) ProtoMessage() {}
 
 func (x *LogLeaf) ProtoReflect() protoreflect.Message {
-	mi := &file_trillian_log_api_proto_msgTypes[20]
+	mi := &file_trillian_log_api_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1384,7 +1494,7 @@ func (x *LogLeaf) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogLeaf.ProtoReflect.Descriptor instead.
 func (*LogLeaf) Descriptor() ([]byte, []int) {
-	return file_trillian_log_api_proto_rawDescGZIP(), []int{20}
+	return file_trillian_log_api_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *LogLeaf) GetMerkleLeafHash() []byte {
@@ -1559,7 +1669,19 @@ var file_trillian_log_api_proto_rawDesc = []byte{
 	0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x5f, 0x6c, 0x6f, 0x67, 0x5f, 0x72, 0x6f, 0x6f, 0x74, 0x18,
 	0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e,
 	0x2e, 0x53, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x4c, 0x6f, 0x67, 0x52, 0x6f, 0x6f, 0x74, 0x52, 0x0d,
-	0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x4c, 0x6f, 0x67, 0x52, 0x6f, 0x6f, 0x74, 0x22, 0x58, 0x0a,
+	0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x4c, 0x6f, 0x67, 0x52, 0x6f, 0x6f, 0x74, 0x22, 0x86, 0x01,
+	0x0a, 0x0e, 0x47, 0x65, 0x74, 0x54, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x15, 0x0a, 0x06, 0x6c, 0x6f, 0x67, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x05, 0x6c, 0x6f, 0x67, 0x49, 0x64, 0x12, 0x2c, 0x0a, 0x08, 0x74, 0x69, 0x6c, 0x65, 0x5f,
+	0x6b, 0x65, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x74, 0x72, 0x69, 0x6c,
+	0x6c, 0x69, 0x61, 0x6e, 0x2e, 0x54, 0x69, 0x6c, 0x65, 0x4b, 0x65, 0x79, 0x52, 0x07, 0x74, 0x69,
+	0x6c, 0x65, 0x4b, 0x65, 0x79, 0x12, 0x2f, 0x0a, 0x09, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x5f,
+	0x74, 0x6f, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c,
+	0x69, 0x61, 0x6e, 0x2e, 0x43, 0x68, 0x61, 0x72, 0x67, 0x65, 0x54, 0x6f, 0x52, 0x08, 0x63, 0x68,
+	0x61, 0x72, 0x67, 0x65, 0x54, 0x6f, 0x22, 0x35, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x54, 0x69, 0x6c,
+	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x22, 0x0a, 0x04, 0x74, 0x69, 0x6c,
+	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69,
+	0x61, 0x6e, 0x2e, 0x54, 0x69, 0x6c, 0x65, 0x52, 0x04, 0x74, 0x69, 0x6c, 0x65, 0x22, 0x58, 0x0a,
 	0x0e, 0x49, 0x6e, 0x69, 0x74, 0x4c, 0x6f, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
 	0x15, 0x0a, 0x06, 0x6c, 0x6f, 0x67, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52,
 	0x05, 0x6c, 0x6f, 0x67, 0x49, 0x64, 0x12, 0x2f, 0x0a, 0x09, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65,
@@ -1629,7 +1751,7 @@ var file_trillian_log_api_proto_rawDesc = []byte{
 	0x74, 0x61, 0x6d, 0x70, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f,
 	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d,
 	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x12, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74,
-	0x65, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x32, 0xdb, 0x06, 0x0a, 0x0b, 0x54,
+	0x65, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x32, 0x9d, 0x07, 0x0a, 0x0b, 0x54,
 	0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x4c, 0x6f, 0x67, 0x12, 0x46, 0x0a, 0x09, 0x51, 0x75,
 	0x65, 0x75, 0x65, 0x4c, 0x65, 0x61, 0x66, 0x12, 0x1a, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69,
 	0x61, 0x6e, 0x2e, 0x51, 0x75, 0x65, 0x75, 0x65, 0x4c, 0x65, 0x61, 0x66, 0x52, 0x65, 0x71, 0x75,
@@ -1667,28 +1789,33 @@ var file_trillian_log_api_proto_rawDesc = []byte{
 	0x79, 0x41, 0x6e, 0x64, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
 	0x1a, 0x22, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e, 0x47, 0x65, 0x74, 0x45,
 	0x6e, 0x74, 0x72, 0x79, 0x41, 0x6e, 0x64, 0x50, 0x72, 0x6f, 0x6f, 0x66, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x40, 0x0a, 0x07, 0x49, 0x6e, 0x69, 0x74, 0x4c, 0x6f,
-	0x67, 0x12, 0x18, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e, 0x49, 0x6e, 0x69,
-	0x74, 0x4c, 0x6f, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x74, 0x72,
-	0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e, 0x49, 0x6e, 0x69, 0x74, 0x4c, 0x6f, 0x67, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x61, 0x0a, 0x12, 0x41, 0x64, 0x64, 0x53,
-	0x65, 0x71, 0x75, 0x65, 0x6e, 0x63, 0x65, 0x64, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x73, 0x12, 0x23,
-	0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e, 0x41, 0x64, 0x64, 0x53, 0x65, 0x71,
-	0x75, 0x65, 0x6e, 0x63, 0x65, 0x64, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e, 0x41,
-	0x64, 0x64, 0x53, 0x65, 0x71, 0x75, 0x65, 0x6e, 0x63, 0x65, 0x64, 0x4c, 0x65, 0x61, 0x76, 0x65,
-	0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x5b, 0x0a, 0x10, 0x47,
-	0x65, 0x74, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x73, 0x42, 0x79, 0x52, 0x61, 0x6e, 0x67, 0x65, 0x12,
-	0x21, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e, 0x47, 0x65, 0x74, 0x4c, 0x65,
-	0x61, 0x76, 0x65, 0x73, 0x42, 0x79, 0x52, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x1a, 0x22, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e, 0x47, 0x65,
-	0x74, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x73, 0x42, 0x79, 0x52, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x4e, 0x0a, 0x19, 0x63, 0x6f, 0x6d, 0x2e,
-	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x42, 0x13, 0x54, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x4c,
-	0x6f, 0x67, 0x41, 0x70, 0x69, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1a, 0x67, 0x69,
-	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f,
-	0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x40, 0x0a, 0x07, 0x47, 0x65, 0x74, 0x54, 0x69, 0x6c,
+	0x65, 0x12, 0x18, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e, 0x47, 0x65, 0x74,
+	0x54, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x74, 0x72,
+	0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e, 0x47, 0x65, 0x74, 0x54, 0x69, 0x6c, 0x65, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x40, 0x0a, 0x07, 0x49, 0x6e, 0x69, 0x74,
+	0x4c, 0x6f, 0x67, 0x12, 0x18, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e, 0x49,
+	0x6e, 0x69, 0x74, 0x4c, 0x6f, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e,
+	0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e, 0x49, 0x6e, 0x69, 0x74, 0x4c, 0x6f, 0x67,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x61, 0x0a, 0x12, 0x41, 0x64,
+	0x64, 0x53, 0x65, 0x71, 0x75, 0x65, 0x6e, 0x63, 0x65, 0x64, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x73,
+	0x12, 0x23, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e, 0x41, 0x64, 0x64, 0x53,
+	0x65, 0x71, 0x75, 0x65, 0x6e, 0x63, 0x65, 0x64, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x73, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e,
+	0x2e, 0x41, 0x64, 0x64, 0x53, 0x65, 0x71, 0x75, 0x65, 0x6e, 0x63, 0x65, 0x64, 0x4c, 0x65, 0x61,
+	0x76, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x5b, 0x0a,
+	0x10, 0x47, 0x65, 0x74, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x73, 0x42, 0x79, 0x52, 0x61, 0x6e, 0x67,
+	0x65, 0x12, 0x21, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e, 0x47, 0x65, 0x74,
+	0x4c, 0x65, 0x61, 0x76, 0x65, 0x73, 0x42, 0x79, 0x52, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x2e,
+	0x47, 0x65, 0x74, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x73, 0x42, 0x79, 0x52, 0x61, 0x6e, 0x67, 0x65,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x4e, 0x0a, 0x19, 0x63, 0x6f,
+	0x6d, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61,
+	0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x42, 0x13, 0x54, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61,
+	0x6e, 0x4c, 0x6f, 0x67, 0x41, 0x70, 0x69, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1a,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
+	0x65, 0x2f, 0x74, 0x72, 0x69, 0x6c, 0x6c, 0x69, 0x61, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -1703,7 +1830,7 @@ func file_trillian_log_api_proto_rawDescGZIP() []byte {
 	return file_trillian_log_api_proto_rawDescData
 }
 
-var file_trillian_log_api_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_trillian_log_api_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_trillian_log_api_proto_goTypes = []interface{}{
 	(*ChargeTo)(nil),                        // 0: trillian.ChargeTo
 	(*QueueLeafRequest)(nil),                // 1: trillian.QueueLeafRequest
@@ -1718,74 +1845,83 @@ var file_trillian_log_api_proto_goTypes = []interface{}{
 	(*GetLatestSignedLogRootResponse)(nil),  // 10: trillian.GetLatestSignedLogRootResponse
 	(*GetEntryAndProofRequest)(nil),         // 11: trillian.GetEntryAndProofRequest
 	(*GetEntryAndProofResponse)(nil),        // 12: trillian.GetEntryAndProofResponse
-	(*InitLogRequest)(nil),                  // 13: trillian.InitLogRequest
-	(*InitLogResponse)(nil),                 // 14: trillian.InitLogResponse
-	(*AddSequencedLeavesRequest)(nil),       // 15: trillian.AddSequencedLeavesRequest
-	(*AddSequencedLeavesResponse)(nil),      // 16: trillian.AddSequencedLeavesResponse
-	(*GetLeavesByRangeRequest)(nil),         // 17: trillian.GetLeavesByRangeRequest
-	(*GetLeavesByRangeResponse)(nil),        // 18: trillian.GetLeavesByRangeResponse
-	(*QueuedLogLeaf)(nil),                   // 19: trillian.QueuedLogLeaf
-	(*LogLeaf)(nil),                         // 20: trillian.LogLeaf
-	(*Proof)(nil),                           // 21: trillian.Proof
-	(*SignedLogRoot)(nil),                   // 22: trillian.SignedLogRoot
-	(*status.Status)(nil),                   // 23: google.rpc.Status
-	(*timestamppb.Timestamp)(nil),           // 24: google.protobuf.Timestamp
+	(*GetTileRequest)(nil),                  // 13: trillian.GetTileRequest
+	(*GetTileResponse)(nil),                 // 14: trillian.GetTileResponse
+	(*InitLogRequest)(nil),                  // 15: trillian.InitLogRequest
+	(*InitLogResponse)(nil),                 // 16: trillian.InitLogResponse
+	(*AddSequencedLeavesRequest)(nil),       // 17: trillian.AddSequencedLeavesRequest
+	(*AddSequencedLeavesResponse)(nil),      // 18: trillian.AddSequencedLeavesResponse
+	(*GetLeavesByRangeRequest)(nil),         // 19: trillian.GetLeavesByRangeRequest
+	(*GetLeavesByRangeResponse)(nil),        // 20: trillian.GetLeavesByRangeResponse
+	(*QueuedLogLeaf)(nil),                   // 21: trillian.QueuedLogLeaf
+	(*LogLeaf)(nil),                         // 22: trillian.LogLeaf
+	(*Proof)(nil),                           // 23: trillian.Proof
+	(*SignedLogRoot)(nil),                   // 24: trillian.SignedLogRoot
+	(*TileKey)(nil),                         // 25: trillian.TileKey
+	(*Tile)(nil),                            // 26: trillian.Tile
+	(*status.Status)(nil),                   // 27: google.rpc.Status
+	(*timestamppb.Timestamp)(nil),           // 28: google.protobuf.Timestamp
 }
 var file_trillian_log_api_proto_depIdxs = []int32{
-	20, // 0: trillian.QueueLeafRequest.leaf:type_name -> trillian.LogLeaf
+	22, // 0: trillian.QueueLeafRequest.leaf:type_name -> trillian.LogLeaf
 	0,  // 1: trillian.QueueLeafRequest.charge_to:type_name -> trillian.ChargeTo
-	19, // 2: trillian.QueueLeafResponse.queued_leaf:type_name -> trillian.QueuedLogLeaf
+	21, // 2: trillian.QueueLeafResponse.queued_leaf:type_name -> trillian.QueuedLogLeaf
 	0,  // 3: trillian.GetInclusionProofRequest.charge_to:type_name -> trillian.ChargeTo
-	21, // 4: trillian.GetInclusionProofResponse.proof:type_name -> trillian.Proof
-	22, // 5: trillian.GetInclusionProofResponse.signed_log_root:type_name -> trillian.SignedLogRoot
+	23, // 4: trillian.GetInclusionProofResponse.proof:type_name -> trillian.Proof
+	24, // 5: trillian.GetInclusionProofResponse.signed_log_root:type_name -> trillian.SignedLogRoot
 	0,  // 6: trillian.GetInclusionProofByHashRequest.charge_to:type_name -> trillian.ChargeTo
-	21, // 7: trillian.GetInclusionProofByHashResponse.proof:type_name -> trillian.Proof
-	22, // 8: trillian.GetInclusionProofByHashResponse.signed_log_root:type_name -> trillian.SignedLogRoot
+	23, // 7: trillian.GetInclusionProofByHashResponse.proof:type_name -> trillian.Proof
+	24, // 8: trillian.GetInclusionProofByHashResponse.signed_log_root:type_name -> trillian.SignedLogRoot
 	0,  // 9: trillian.GetConsistencyProofRequest.charge_to:type_name -> trillian.ChargeTo
-	21, // 10: trillian.GetConsistencyProofResponse.proof:type_name -> trillian.Proof
-	22, // 11: trillian.GetConsistencyProofResponse.signed_log_root:type_name -> trillian.SignedLogRoot
+	23, // 10: trillian.GetConsistencyProofResponse.proof:type_name -> trillian.Proof
+	24, // 11: trillian.GetConsistencyProofResponse.signed_log_root:type_name -> trillian.SignedLogRoot
 	0,  // 12: trillian.GetLatestSignedLogRootRequest.charge_to:type_name -> trillian.ChargeTo
-	22, // 13: trillian.GetLatestSignedLogRootResponse.signed_log_root:type_name -> trillian.SignedLogRoot
-	21, // 14: trillian.GetLatestSignedLogRootResponse.proof:type_name -> trillian.Proof
+	24, // 13: trillian.GetLatestSignedLogRootResponse.signed_log_root:type_name -> trillian.SignedLogRoot
+	23, // 14: trillian.GetLatestSignedLogRootResponse.proof:type_name -> trillian.Proof
 	0,  // 15: trillian.GetEntryAndProofRequest.charge_to:type_name -> trillian.ChargeTo
-	21, // 16: trillian.GetEntryAndProofResponse.proof:type_name -> trillian.Proof
-	20, // 17: trillian.GetEntryAndProofResponse.leaf:type_name -> trillian.LogLeaf
-	22, // 18: trillian.GetEntryAndProofResponse.signed_log_root:type_name -> trillian.SignedLogRoot
-	0,  // 19: trillian.InitLogRequest.charge_to:type_name -> trillian.ChargeTo
-	22, // 20: trillian.InitLogResponse.created:type_name -> trillian.SignedLogRoot
-	20, // 21: trillian.AddSequencedLeavesRequest.leaves:type_name -> trillian.LogLeaf
-	0,  // 22: trillian.AddSequencedLeavesRequest.charge_to:type_name -> trillian.ChargeTo
-	19, // 23: trillian.AddSequencedLeavesResponse.results:type_name -> trillian.QueuedLogLeaf
-	0,  // 24: trillian.GetLeavesByRangeRequest.charge_to:type_name -> trillian.ChargeTo
-	20, // 25: trillian.GetLeavesByRangeResponse.leaves:type_name -> trillian.LogLeaf
-	22, // 26: trillian.GetLeavesByRangeResponse.signed_log_root:type_name -> trillian.SignedLogRoot
-	20, // 27: trillian.QueuedLogLeaf.leaf:type_name -> trillian.LogLeaf
-	23, // 28: trillian.QueuedLogLeaf.status:type_name -> google.rpc.Status
-	24, // 29: trillian.LogLeaf.queue_timestamp:type_name -> google.protobuf.Timestamp
-	24, // 30: trillian.LogLeaf.integrate_timestamp:type_name -> google.protobuf.Timestamp
-	1,  // 31: trillian.TrillianLog.QueueLeaf:input_type -> trillian.QueueLeafRequest
-	3,  // 32: trillian.TrillianLog.GetInclusionProof:input_type -> trillian.GetInclusionProofRequest
-	5,  // 33: trillian.TrillianLog.GetInclusionProofByHash:input_type -> trillian.GetInclusionProofByHashRequest
-	7,  // 34: trillian.TrillianLog.GetConsistencyProof:input_type -> trillian.GetConsistencyProofRequest
-	9,  // 35: trillian.TrillianLog.GetLatestSignedLogRoot:input_type -> trillian.GetLatestSignedLogRootRequest
-	11, // 36: trillian.TrillianLog.GetEntryAndProof:input_type -> trillian.GetEntryAndProofRequest
-	13, // 37: trillian.TrillianLog.InitLog:input_type -> trillian.InitLogRequest
-	15, // 38: trillian.TrillianLog.AddSequencedLeaves:input_type -> trillian.AddSequencedLeavesRequest
-	17, // 39: trillian.TrillianLog.GetLeavesByRange:input_type -> trillian.GetLeavesByRangeRequest
-	2,  // 40: trillian.TrillianLog.QueueLeaf:output_type -> trillian.QueueLeafResponse
-	4,  // 41: trillian.TrillianLog.GetInclusionProof:output_type -> trillian.GetInclusionProofResponse
-	6,  // 42: trillian.TrillianLog.GetInclusionProofByHash:output_type -> trillian.GetInclusionProofByHashResponse
-	8,  // 43: trillian.TrillianLog.GetConsistencyProof:output_type -> trillian.GetConsistencyProofResponse
-	10, // 44: trillian.TrillianLog.GetLatestSignedLogRoot:output_type -> trillian.GetLatestSignedLogRootResponse
-	12, // 45: trillian.TrillianLog.GetEntryAndProof:output_type -> trillian.GetEntryAndProofResponse
-	14, // 46: trillian.TrillianLog.InitLog:output_type -> trillian.InitLogResponse
-	16, // 47: trillian.TrillianLog.AddSequencedLeaves:output_type -> trillian.AddSequencedLeavesResponse
-	18, // 48: trillian.TrillianLog.GetLeavesByRange:output_type -> trillian.GetLeavesByRangeResponse
-	40, // [40:49] is the sub-list for method output_type
-	31, // [31:40] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	23, // 16: trillian.GetEntryAndProofResponse.proof:type_name -> trillian.Proof
+	22, // 17: trillian.GetEntryAndProofResponse.leaf:type_name -> trillian.LogLeaf
+	24, // 18: trillian.GetEntryAndProofResponse.signed_log_root:type_name -> trillian.SignedLogRoot
+	25, // 19: trillian.GetTileRequest.tile_key:type_name -> trillian.TileKey
+	0,  // 20: trillian.GetTileRequest.charge_to:type_name -> trillian.ChargeTo
+	26, // 21: trillian.GetTileResponse.tile:type_name -> trillian.Tile
+	0,  // 22: trillian.InitLogRequest.charge_to:type_name -> trillian.ChargeTo
+	24, // 23: trillian.InitLogResponse.created:type_name -> trillian.SignedLogRoot
+	22, // 24: trillian.AddSequencedLeavesRequest.leaves:type_name -> trillian.LogLeaf
+	0,  // 25: trillian.AddSequencedLeavesRequest.charge_to:type_name -> trillian.ChargeTo
+	21, // 26: trillian.AddSequencedLeavesResponse.results:type_name -> trillian.QueuedLogLeaf
+	0,  // 27: trillian.GetLeavesByRangeRequest.charge_to:type_name -> trillian.ChargeTo
+	22, // 28: trillian.GetLeavesByRangeResponse.leaves:type_name -> trillian.LogLeaf
+	24, // 29: trillian.GetLeavesByRangeResponse.signed_log_root:type_name -> trillian.SignedLogRoot
+	22, // 30: trillian.QueuedLogLeaf.leaf:type_name -> trillian.LogLeaf
+	27, // 31: trillian.QueuedLogLeaf.status:type_name -> google.rpc.Status
+	28, // 32: trillian.LogLeaf.queue_timestamp:type_name -> google.protobuf.Timestamp
+	28, // 33: trillian.LogLeaf.integrate_timestamp:type_name -> google.protobuf.Timestamp
+	1,  // 34: trillian.TrillianLog.QueueLeaf:input_type -> trillian.QueueLeafRequest
+	3,  // 35: trillian.TrillianLog.GetInclusionProof:input_type -> trillian.GetInclusionProofRequest
+	5,  // 36: trillian.TrillianLog.GetInclusionProofByHash:input_type -> trillian.GetInclusionProofByHashRequest
+	7,  // 37: trillian.TrillianLog.GetConsistencyProof:input_type -> trillian.GetConsistencyProofRequest
+	9,  // 38: trillian.TrillianLog.GetLatestSignedLogRoot:input_type -> trillian.GetLatestSignedLogRootRequest
+	11, // 39: trillian.TrillianLog.GetEntryAndProof:input_type -> trillian.GetEntryAndProofRequest
+	13, // 40: trillian.TrillianLog.GetTile:input_type -> trillian.GetTileRequest
+	15, // 41: trillian.TrillianLog.InitLog:input_type -> trillian.InitLogRequest
+	17, // 42: trillian.TrillianLog.AddSequencedLeaves:input_type -> trillian.AddSequencedLeavesRequest
+	19, // 43: trillian.TrillianLog.GetLeavesByRange:input_type -> trillian.GetLeavesByRangeRequest
+	2,  // 44: trillian.TrillianLog.QueueLeaf:output_type -> trillian.QueueLeafResponse
+	4,  // 45: trillian.TrillianLog.GetInclusionProof:output_type -> trillian.GetInclusionProofResponse
+	6,  // 46: trillian.TrillianLog.GetInclusionProofByHash:output_type -> trillian.GetInclusionProofByHashResponse
+	8,  // 47: trillian.TrillianLog.GetConsistencyProof:output_type -> trillian.GetConsistencyProofResponse
+	10, // 48: trillian.TrillianLog.GetLatestSignedLogRoot:output_type -> trillian.GetLatestSignedLogRootResponse
+	12, // 49: trillian.TrillianLog.GetEntryAndProof:output_type -> trillian.GetEntryAndProofResponse
+	14, // 50: trillian.TrillianLog.GetTile:output_type -> trillian.GetTileResponse
+	16, // 51: trillian.TrillianLog.InitLog:output_type -> trillian.InitLogResponse
+	18, // 52: trillian.TrillianLog.AddSequencedLeaves:output_type -> trillian.AddSequencedLeavesResponse
+	20, // 53: trillian.TrillianLog.GetLeavesByRange:output_type -> trillian.GetLeavesByRangeResponse
+	44, // [44:54] is the sub-list for method output_type
+	34, // [34:44] is the sub-list for method input_type
+	34, // [34:34] is the sub-list for extension type_name
+	34, // [34:34] is the sub-list for extension extendee
+	0,  // [0:34] is the sub-list for field type_name
 }
 
 func init() { file_trillian_log_api_proto_init() }
@@ -1952,7 +2088,7 @@ func file_trillian_log_api_proto_init() {
 			}
 		}
 		file_trillian_log_api_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*InitLogRequest); i {
+			switch v := v.(*GetTileRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1964,7 +2100,7 @@ func file_trillian_log_api_proto_init() {
 			}
 		}
 		file_trillian_log_api_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*InitLogResponse); i {
+			switch v := v.(*GetTileResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1976,7 +2112,7 @@ func file_trillian_log_api_proto_init() {
 			}
 		}
 		file_trillian_log_api_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddSequencedLeavesRequest); i {
+			switch v := v.(*InitLogRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1988,7 +2124,7 @@ func file_trillian_log_api_proto_init() {
 			}
 		}
 		file_trillian_log_api_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddSequencedLeavesResponse); i {
+			switch v := v.(*InitLogResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2000,7 +2136,7 @@ func file_trillian_log_api_proto_init() {
 			}
 		}
 		file_trillian_log_api_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetLeavesByRangeRequest); i {
+			switch v := v.(*AddSequencedLeavesRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2012,7 +2148,7 @@ func file_trillian_log_api_proto_init() {
 			}
 		}
 		file_trillian_log_api_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetLeavesByRangeResponse); i {
+			switch v := v.(*AddSequencedLeavesResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2024,7 +2160,7 @@ func file_trillian_log_api_proto_init() {
 			}
 		}
 		file_trillian_log_api_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueuedLogLeaf); i {
+			switch v := v.(*GetLeavesByRangeRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2036,6 +2172,30 @@ func file_trillian_log_api_proto_init() {
 			}
 		}
 		file_trillian_log_api_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetLeavesByRangeResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_trillian_log_api_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*QueuedLogLeaf); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_trillian_log_api_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*LogLeaf); i {
 			case 0:
 				return &v.state
@@ -2054,7 +2214,7 @@ func file_trillian_log_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_trillian_log_api_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   21,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

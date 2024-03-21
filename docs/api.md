@@ -19,6 +19,8 @@
     - [GetLatestSignedLogRootResponse](#trillian-GetLatestSignedLogRootResponse)
     - [GetLeavesByRangeRequest](#trillian-GetLeavesByRangeRequest)
     - [GetLeavesByRangeResponse](#trillian-GetLeavesByRangeResponse)
+    - [GetTileRequest](#trillian-GetTileRequest)
+    - [GetTileResponse](#trillian-GetTileResponse)
     - [InitLogRequest](#trillian-InitLogRequest)
     - [InitLogResponse](#trillian-InitLogResponse)
     - [LogLeaf](#trillian-LogLeaf)
@@ -40,8 +42,13 @@
     - [TrillianAdmin](#trillian-TrillianAdmin)
   
 - [trillian.proto](#trillian-proto)
+    - [NodeID](#trillian-NodeID)
     - [Proof](#trillian-Proof)
     - [SignedLogRoot](#trillian-SignedLogRoot)
+    - [Tile](#trillian-Tile)
+    - [Tile.InternalNodesEntry](#trillian-Tile-InternalNodesEntry)
+    - [Tile.LeavesEntry](#trillian-Tile-LeavesEntry)
+    - [TileKey](#trillian-TileKey)
     - [Tree](#trillian-Tree)
   
     - [HashStrategy](#trillian-HashStrategy)
@@ -315,6 +322,38 @@ As an example, a Certificate Transparency frontend might set the following user 
 
 
 
+<a name="trillian-GetTileRequest"></a>
+
+### GetTileRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| log_id | [int64](#int64) |  |  |
+| tile_key | [TileKey](#trillian-TileKey) |  |  |
+| charge_to | [ChargeTo](#trillian-ChargeTo) |  |  |
+
+
+
+
+
+
+<a name="trillian-GetTileResponse"></a>
+
+### GetTileResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tile | [Tile](#trillian-Tile) |  |  |
+
+
+
+
+
+
 <a name="trillian-InitLogRequest"></a>
 
 ### InitLogRequest
@@ -488,6 +527,9 @@ If the earlier tree size is larger than the server is aware of, an InvalidArgume
 | GetEntryAndProof | [GetEntryAndProofRequest](#trillian-GetEntryAndProofRequest) | [GetEntryAndProofResponse](#trillian-GetEntryAndProofResponse) | GetEntryAndProof returns a log leaf and the corresponding inclusion proof to a specified tree size, for a given leaf index in a particular tree.
 
 If the requested tree size is unavailable but the leaf is in scope for the current tree, the returned proof will be for the current tree size rather than the requested tree size. |
+| GetTile | [GetTileRequest](#trillian-GetTileRequest) | [GetTileResponse](#trillian-GetTileResponse) | GetTile returns a Tile which root is at a given path.
+
+TODO: add more details |
 | InitLog | [InitLogRequest](#trillian-InitLogRequest) | [InitLogResponse](#trillian-InitLogResponse) | InitLog initializes a particular tree, creating the initial signed log root (which will be of size 0). |
 | AddSequencedLeaves | [AddSequencedLeavesRequest](#trillian-AddSequencedLeavesRequest) | [AddSequencedLeavesResponse](#trillian-AddSequencedLeavesResponse) | AddSequencedLeaves adds a batch of leaves with assigned sequence numbers to a pre-ordered log. The indices of the provided leaves must be contiguous. |
 | GetLeavesByRange | [GetLeavesByRangeRequest](#trillian-GetLeavesByRangeRequest) | [GetLeavesByRangeResponse](#trillian-GetLeavesByRangeResponse) | GetLeavesByRange returns a batch of leaves whose leaf indices are in a sequential range. |
@@ -644,6 +686,22 @@ Allows creation and management of Trillian trees.
 
 
 
+<a name="trillian-NodeID"></a>
+
+### NodeID
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| level | [uint64](#uint64) |  |  |
+| index | [uint64](#uint64) |  |  |
+
+
+
+
+
+
 <a name="trillian-Proof"></a>
 
 ### Proof
@@ -688,6 +746,76 @@ A serialized v1 log root will therefore be laid out as:
 &#43;---&#43;---&#43;---&#43;---&#43;---&#43;-....---&#43; | len | metadata | &#43;---&#43;---&#43;---&#43;---&#43;---&#43;-....---&#43;
 
 (with all integers encoded big-endian). |
+
+
+
+
+
+
+<a name="trillian-Tile"></a>
+
+### Tile
+Tile holds a tile representation of a Merkle subtree.
+Copy of the subtree proto for now
+TODO(phboneff): simplify this
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prefix | [bytes](#bytes) |  | subtree&#39;s prefix (must be a multiple of 8 bits) |
+| depth | [int32](#int32) |  | subtree&#39;s depth |
+| leaves | [Tile.LeavesEntry](#trillian-Tile-LeavesEntry) | repeated | map of suffix (within subtree) to subtree-leaf node hash |
+| internal_nodes | [Tile.InternalNodesEntry](#trillian-Tile-InternalNodesEntry) | repeated | Map of suffix (within subtree) to subtree-internal node hash. This structure is usually used in RAM as a cache, the internal nodes of the subtree are not generally stored. However internal nodes are stored for partially filled log subtrees. |
+| internal_node_count | [uint32](#uint32) |  | Used as a crosscheck on the internal node map by recording its expected size after loading and repopulation. |
+
+
+
+
+
+
+<a name="trillian-Tile-InternalNodesEntry"></a>
+
+### Tile.InternalNodesEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [bytes](#bytes) |  |  |
+
+
+
+
+
+
+<a name="trillian-Tile-LeavesEntry"></a>
+
+### Tile.LeavesEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [bytes](#bytes) |  |  |
+
+
+
+
+
+
+<a name="trillian-TileKey"></a>
+
+### TileKey
+TODO(phboneff): I&#39;d use uint64, but everything else in this file uses int64,
+even when it could use an uint64, so let&#39;s punt this for now.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tile_level | [uint64](#uint64) |  |  |
+| tile_index | [uint64](#uint64) |  |  |
 
 
 
