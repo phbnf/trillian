@@ -46,12 +46,9 @@ import (
 	"k8s.io/klog/v2"
 
 	// Register supported storage providers.
-	_ "github.com/google/trillian/storage/cloudspanner"
-	_ "github.com/google/trillian/storage/crdb"
 	_ "github.com/google/trillian/storage/mysql"
 
 	// Load quota providers
-	_ "github.com/google/trillian/quota/crdbqm"
 	_ "github.com/google/trillian/quota/mysqlqm"
 )
 
