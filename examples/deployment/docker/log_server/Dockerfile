@@ -1,6 +1,7 @@
 FROM golang:1.22.1-bookworm@sha256:d996c645c9934e770e64f05fc2bc103755197b43fd999b3aa5419142e1ee6d78 as build
 
-WORKDIR /trillian
+#WORKDIR /trillian
+WORKDIR /usr/local/google/home/phboneff/git/phbnf/trillian
 
 ARG GOFLAGS=""
 ENV GOFLAGS=$GOFLAGS
