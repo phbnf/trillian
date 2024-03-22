@@ -83,10 +83,10 @@ func validateGetEntryAndProofRequest(req *trillian.GetEntryAndProofRequest) erro
 }
 
 func validateGetTileRequest(req *trillian.GetTileRequest) error {
-	if req.TileKey.TileLevel <= 0 {
+	if req.TileKey.TileLevel < 0 {
 		return status.Errorf(codes.InvalidArgument, "GetTile.TileKey.TileLevel: %v, want > 0", req.TileKey.TileLevel)
 	}
-	if req.TileKey.TileIndex <= 0 {
+	if req.TileKey.TileIndex < 0 {
 		return status.Errorf(codes.InvalidArgument, "GetTile.TileKey.TileIndex: %v, want > 0", req.TileKey.TileIndex)
 	}
 	return nil
