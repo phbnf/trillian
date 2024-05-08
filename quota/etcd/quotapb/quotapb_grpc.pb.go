@@ -16,7 +16,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.20.1
-// source: quotapb.proto
+// source: quota/etcd/quotapb/quotapb.proto
 
 package quotapb
 
@@ -278,5 +278,5 @@ var Quota_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "quotapb.proto",
+	Metadata: "quota/etcd/quotapb/quotapb.proto",
 }
